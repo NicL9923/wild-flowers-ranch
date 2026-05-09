@@ -1,10 +1,15 @@
-const FLOWER_PALETTES = {
+type Season = 'spring' | 'summer' | 'autumn'
+type Density = 'sparse' | 'normal' | 'lush'
+type BloomColor = 'cream' | 'pink' | 'lav' | 'yellow' | 'white' | 'coral'
+type BloomType = 'daisy' | 'cluster' | 'spike' | 'bell'
+
+const FLOWER_PALETTES: Record<Season, BloomColor[]> = {
   spring: ['cream', 'pink', 'lav', 'yellow', 'white', 'coral'],
   summer: ['yellow', 'coral', 'pink', 'cream', 'lav', 'white'],
   autumn: ['coral', 'yellow', 'cream', 'pink', 'coral', 'cream'],
 }
 
-const COLOR = {
+const COLOR: Record<BloomColor, string> = {
   cream: 'var(--bloom-cream)',
   pink: 'var(--bloom-pink)',
   lav: 'var(--bloom-lav)',
@@ -13,7 +18,9 @@ const COLOR = {
   white: 'var(--bloom-white)',
 }
 
-const BRANCHES = [
+type Branch = { d: string; delay: number; dur: number; w: number; group: string }
+
+const BRANCHES: Branch[] = [
   {
     d: 'M 690 730 C 600 740, 480 770, 360 850 C 300 890, 280 905, 260 915',
     delay: 1.05,
@@ -74,7 +81,17 @@ const BRANCHES = [
   { d: 'M 740 320 C 760 270, 775 230, 785 200', delay: 2.85, dur: 0.85, w: 4, group: 'up' },
 ]
 
-const CANOPY = [
+type CanopyBlob = {
+  cx: number
+  cy: number
+  rx: number
+  ry: number
+  fill: string
+  delay: number
+  op: number
+}
+
+const CANOPY: CanopyBlob[] = [
   { cx: 700, cy: 220, rx: 380, ry: 160, fill: 'leaf-3', delay: 2.9, op: 0.85 },
   { cx: 410, cy: 280, rx: 230, ry: 170, fill: 'leaf-3', delay: 3.0, op: 0.85 },
   { cx: 990, cy: 280, rx: 230, ry: 170, fill: 'leaf-3', delay: 3.0, op: 0.85 },
@@ -102,7 +119,9 @@ const CANOPY = [
   { cx: 820, cy: 170, rx: 60, ry: 45, fill: 'leaf-3', delay: 4.3, op: 0.6 },
 ]
 
-const GRASS = [
+type GrassBlade = { x: number; dx: number }
+
+const GRASS: GrassBlade[] = [
   { x: 540, dx: -8 },
   { x: 555, dx: 4 },
   { x: 570, dx: -6 },
@@ -118,34 +137,52 @@ const GRASS = [
   { x: 820, dx: -7 },
 ]
 
-function buildFlowers(palette, density) {
-  const palettes = FLOWER_PALETTES[palette] || FLOWER_PALETTES.spring
-  const positions = [
-    { x: 90, h: 220, type: 'spike', c: palettes[2], lean: -3 },
-    { x: 150, h: 180, type: 'cluster', c: palettes[0], lean: 2 },
-    { x: 215, h: 240, type: 'daisy', c: palettes[3], lean: -1 },
-    { x: 280, h: 195, type: 'spike', c: palettes[2], lean: 4 },
-    { x: 340, h: 230, type: 'cluster', c: palettes[5], lean: -2 },
-    { x: 410, h: 260, type: 'daisy', c: palettes[1], lean: 1 },
-    { x: 480, h: 210, type: 'bell', c: palettes[2], lean: -3 },
-    { x: 545, h: 245, type: 'cluster', c: palettes[0], lean: 2 },
-    { x: 615, h: 200, type: 'spike', c: palettes[4], lean: -1 },
-    { x: 785, h: 200, type: 'spike', c: palettes[2], lean: 1 },
-    { x: 855, h: 245, type: 'cluster', c: palettes[3], lean: -2 },
-    { x: 920, h: 210, type: 'bell', c: palettes[1], lean: 3 },
-    { x: 990, h: 260, type: 'daisy', c: palettes[0], lean: -1 },
-    { x: 1060, h: 230, type: 'cluster', c: palettes[5], lean: 2 },
-    { x: 1120, h: 195, type: 'spike', c: palettes[2], lean: -4 },
-    { x: 1185, h: 240, type: 'daisy', c: palettes[1], lean: 1 },
-    { x: 1250, h: 180, type: 'cluster', c: palettes[0], lean: -2 },
-    { x: 1310, h: 220, type: 'spike', c: palettes[3], lean: 3 },
+type FlowerDef = { x: number; h: number; type: BloomType; c: BloomColor; lean: number }
+
+function buildFlowers(palette: Season, density: Density): FlowerDef[] {
+  const p = FLOWER_PALETTES[palette]
+  const positions: FlowerDef[] = [
+    { x: 90, h: 220, type: 'spike', c: p[2], lean: -3 },
+    { x: 150, h: 180, type: 'cluster', c: p[0], lean: 2 },
+    { x: 215, h: 240, type: 'daisy', c: p[3], lean: -1 },
+    { x: 280, h: 195, type: 'spike', c: p[2], lean: 4 },
+    { x: 340, h: 230, type: 'cluster', c: p[5], lean: -2 },
+    { x: 410, h: 260, type: 'daisy', c: p[1], lean: 1 },
+    { x: 480, h: 210, type: 'bell', c: p[2], lean: -3 },
+    { x: 545, h: 245, type: 'cluster', c: p[0], lean: 2 },
+    { x: 615, h: 200, type: 'spike', c: p[4], lean: -1 },
+    { x: 785, h: 200, type: 'spike', c: p[2], lean: 1 },
+    { x: 855, h: 245, type: 'cluster', c: p[3], lean: -2 },
+    { x: 920, h: 210, type: 'bell', c: p[1], lean: 3 },
+    { x: 990, h: 260, type: 'daisy', c: p[0], lean: -1 },
+    { x: 1060, h: 230, type: 'cluster', c: p[5], lean: 2 },
+    { x: 1120, h: 195, type: 'spike', c: p[2], lean: -4 },
+    { x: 1185, h: 240, type: 'daisy', c: p[1], lean: 1 },
+    { x: 1250, h: 180, type: 'cluster', c: p[0], lean: -2 },
+    { x: 1310, h: 220, type: 'spike', c: p[3], lean: 3 },
   ]
   return density === 'sparse' ? positions.filter((_, i) => i % 2 === 0) : positions
 }
 
-const Bloom = ({ x, y, c, type, delay }) => {
-  const color = COLOR[c] || COLOR.cream
-  const style = { '--cx': `${x}px`, '--cy': `${y}px`, '--delay': `${delay}s` }
+function Bloom({
+  x,
+  y,
+  c,
+  type,
+  delay,
+}: {
+  x: number
+  y: number
+  c: BloomColor
+  type: BloomType
+  delay: number
+}) {
+  const color = COLOR[c]
+  const style = {
+    '--cx': `${x}px`,
+    '--cy': `${y}px`,
+    '--delay': `${delay}s`,
+  } as React.CSSProperties
 
   if (type === 'daisy') {
     const petals = Array.from({ length: 7 }, (_, i) => {
@@ -175,21 +212,23 @@ const Bloom = ({ x, y, c, type, delay }) => {
   }
 
   if (type === 'cluster') {
-    const dots = [
-      [0, 0],
-      [-7, -3],
-      [7, -3],
-      [-4, -9],
-      [4, -9],
-      [0, -12],
-      [-10, 2],
-      [10, 2],
-      [-6, 6],
-      [6, 6],
-      [0, 7],
-      [-12, -6],
-      [12, -6],
-    ].map(([dx, dy], i) => <circle key={i} cx={x + dx} cy={y + dy} r={2.6} fill={color} />)
+    const dots = (
+      [
+        [0, 0],
+        [-7, -3],
+        [7, -3],
+        [-4, -9],
+        [4, -9],
+        [0, -12],
+        [-10, 2],
+        [10, 2],
+        [-6, 6],
+        [6, 6],
+        [0, 7],
+        [-12, -6],
+        [12, -6],
+      ] as [number, number][]
+    ).map(([dx, dy], i) => <circle key={i} cx={x + dx} cy={y + dy} r={2.6} fill={color} />)
     return (
       <g className="bloom" style={style}>
         {dots}
@@ -239,7 +278,7 @@ const Bloom = ({ x, y, c, type, delay }) => {
   return null
 }
 
-const Flower = ({ flower, idx }) => {
+function Flower({ flower, idx }: { flower: FlowerDef; idx: number }) {
   const { x, h, type, c, lean } = flower
   const baseY = 1000
   const tipY = baseY - h
@@ -247,7 +286,6 @@ const Flower = ({ flower, idx }) => {
   const ctlX = x + lean * 3
   const ctlY = baseY - h * 0.55
   const stemDelay = 1.0 + idx * 0.08
-  const bloomDelay = stemDelay + 0.8
   const leafY1 = baseY - h * 0.4
   const leafY2 = baseY - h * 0.7
 
@@ -258,7 +296,7 @@ const Flower = ({ flower, idx }) => {
         pathLength="1"
         d={`M ${x} ${baseY} Q ${ctlX} ${ctlY}, ${tipX} ${tipY}`}
         strokeWidth={2}
-        style={{ '--delay': `${stemDelay}s` }}
+        style={{ '--delay': `${stemDelay}s` } as React.CSSProperties}
       />
       {idx % 2 === 0 && (
         <>
@@ -270,11 +308,13 @@ const Flower = ({ flower, idx }) => {
             ry={3}
             fill="var(--leaf-1)"
             transform={`rotate(-30 ${x - 7} ${leafY1})`}
-            style={{
-              '--cx': `${x - 7}px`,
-              '--cy': `${leafY1}px`,
-              '--delay': `${stemDelay + 0.4}s`,
-            }}
+            style={
+              {
+                '--cx': `${x - 7}px`,
+                '--cy': `${leafY1}px`,
+                '--delay': `${stemDelay + 0.4}s`,
+              } as React.CSSProperties
+            }
           />
           <ellipse
             className="leaf-tiny"
@@ -284,20 +324,22 @@ const Flower = ({ flower, idx }) => {
             ry={2.5}
             fill="var(--leaf-2)"
             transform={`rotate(30 ${x + 7} ${leafY2})`}
-            style={{
-              '--cx': `${x + 7}px`,
-              '--cy': `${leafY2}px`,
-              '--delay': `${stemDelay + 0.55}s`,
-            }}
+            style={
+              {
+                '--cx': `${x + 7}px`,
+                '--cy': `${leafY2}px`,
+                '--delay': `${stemDelay + 0.55}s`,
+              } as React.CSSProperties
+            }
           />
         </>
       )}
-      <Bloom x={tipX} y={tipY} c={c} type={type} delay={bloomDelay} />
+      <Bloom x={tipX} y={tipY} c={c} type={type} delay={stemDelay + 0.8} />
     </g>
   )
 }
 
-const GrassTuft = ({ x, dx, idx }) => {
+function GrassTuft({ x, dx, idx }: GrassBlade & { idx: number }) {
   const baseY = 1000
   const h = 18 + (idx % 3) * 6
   return (
@@ -308,96 +350,113 @@ const GrassTuft = ({ x, dx, idx }) => {
       strokeWidth={1.6}
       strokeLinecap="round"
       fill="none"
-      style={{
-        '--cx': `${x}px`,
-        '--cy': `${baseY}px`,
-        '--delay': `${0.5 + idx * 0.05}s`,
-        transformOrigin: `${x}px ${baseY}px`,
-      }}
+      style={
+        {
+          '--cx': `${x}px`,
+          '--cy': `${baseY}px`,
+          '--delay': `${0.5 + idx * 0.05}s`,
+          transformOrigin: `${x}px ${baseY}px`,
+        } as React.CSSProperties
+      }
     />
   )
 }
 
-const Trunk = () => (
-  <g>
-    <path
-      className="trunk-fill"
-      d="M 670 1000 C 668 950, 665 900, 670 850 C 674 800, 678 760, 686 720
-         C 690 680, 690 640, 692 600 C 694 560, 695 520, 696 470
-         L 704 470 C 705 520, 706 560, 708 600 C 710 640, 710 680, 714 720
-         C 722 760, 726 800, 730 850 C 735 900, 732 950, 730 1000 Z"
-      fill="var(--bark)"
-      style={{ transformOrigin: '700px 1000px' }}
-    />
-    <path
-      className="trunk-fill"
-      d="M 685 1000 C 686 940, 686 870, 690 800 C 694 730, 696 660, 698 580
-         C 699 530, 700 490, 700 470"
-      stroke="var(--bark-deep)"
-      strokeWidth="2"
-      fill="none"
-      strokeLinecap="round"
-      style={{ transformOrigin: '700px 1000px', animationDelay: '0.3s' }}
-    />
-    <path
-      className="trunk-fill"
-      d="M 600 1000 C 630 990, 660 985, 670 985 L 670 1000 Z"
-      fill="var(--bark)"
-      style={{
-        transformOrigin: '630px 1000px',
-        animationDelay: '0.05s',
-        animationDuration: '0.9s',
-      }}
-    />
-    <path
-      className="trunk-fill"
-      d="M 800 1000 C 770 990, 740 985, 730 985 L 730 1000 Z"
-      fill="var(--bark)"
-      style={{
-        transformOrigin: '770px 1000px',
-        animationDelay: '0.05s',
-        animationDuration: '0.9s',
-      }}
-    />
-  </g>
-)
-
-const Branches = () => (
-  <g>
-    {BRANCHES.map((b, i) => (
+function Trunk() {
+  return (
+    <g>
       <path
-        key={i}
-        className="branch-stroke"
-        d={b.d}
-        pathLength="1"
-        strokeWidth={b.w}
-        style={{ '--delay': `${b.delay}s`, '--dur': `${b.dur}s` }}
+        className="trunk-fill"
+        d="M 670 1000 C 668 950, 665 900, 670 850 C 674 800, 678 760, 686 720
+           C 690 680, 690 640, 692 600 C 694 560, 695 520, 696 470
+           L 704 470 C 705 520, 706 560, 708 600 C 710 640, 710 680, 714 720
+           C 722 760, 726 800, 730 850 C 735 900, 732 950, 730 1000 Z"
+        fill="var(--bark)"
+        style={{ transformOrigin: '700px 1000px' }}
       />
-    ))}
-  </g>
-)
+      <path
+        className="trunk-fill"
+        d="M 685 1000 C 686 940, 686 870, 690 800 C 694 730, 696 660, 698 580
+           C 699 530, 700 490, 700 470"
+        stroke="var(--bark-deep)"
+        strokeWidth="2"
+        fill="none"
+        strokeLinecap="round"
+        style={{ transformOrigin: '700px 1000px', animationDelay: '0.3s' }}
+      />
+      <path
+        className="trunk-fill"
+        d="M 600 1000 C 630 990, 660 985, 670 985 L 670 1000 Z"
+        fill="var(--bark)"
+        style={{
+          transformOrigin: '630px 1000px',
+          animationDelay: '0.05s',
+          animationDuration: '0.9s',
+        }}
+      />
+      <path
+        className="trunk-fill"
+        d="M 800 1000 C 770 990, 740 985, 730 985 L 730 1000 Z"
+        fill="var(--bark)"
+        style={{
+          transformOrigin: '770px 1000px',
+          animationDelay: '0.05s',
+          animationDuration: '0.9s',
+        }}
+      />
+    </g>
+  )
+}
 
-const CanopyBlob = ({ cx, cy, rx, ry, fill, delay, op }) => (
-  <ellipse
-    className="canopy-blob"
-    cx={cx}
-    cy={cy}
-    rx={rx}
-    ry={ry}
-    fill={`var(--${fill})`}
-    style={{ '--cx': `${cx}px`, '--cy': `${cy}px`, '--delay': `${delay}s`, opacity: op }}
-  />
-)
+function Branches() {
+  return (
+    <g>
+      {BRANCHES.map((b, i) => (
+        <path
+          key={i}
+          className="branch-stroke"
+          d={b.d}
+          pathLength="1"
+          strokeWidth={b.w}
+          style={{ '--delay': `${b.delay}s`, '--dur': `${b.dur}s` } as React.CSSProperties}
+        />
+      ))}
+    </g>
+  )
+}
 
-const Canopy = () => (
-  <g className="canopy-group">
-    {CANOPY.map((c, i) => (
-      <CanopyBlob key={i} {...c} />
-    ))}
-  </g>
-)
+function CanopyBlobEl({ cx, cy, rx, ry, fill, delay, op }: CanopyBlob) {
+  return (
+    <ellipse
+      className="canopy-blob"
+      cx={cx}
+      cy={cy}
+      rx={rx}
+      ry={ry}
+      fill={`var(--${fill})`}
+      style={
+        {
+          '--cx': `${cx}px`,
+          '--cy': `${cy}px`,
+          '--delay': `${delay}s`,
+          opacity: op,
+        } as React.CSSProperties
+      }
+    />
+  )
+}
 
-const Wildflowers = ({ palette, density }) => {
+function Canopy() {
+  return (
+    <g className="canopy-group">
+      {CANOPY.map((c, i) => (
+        <CanopyBlobEl key={i} {...c} />
+      ))}
+    </g>
+  )
+}
+
+function Wildflowers({ palette, density }: { palette: Season; density: Density }) {
   const flowers = buildFlowers(palette, density)
   return (
     <g>
@@ -408,15 +467,25 @@ const Wildflowers = ({ palette, density }) => {
   )
 }
 
-const Grass = () => (
-  <g>
-    {GRASS.map((g, i) => (
-      <GrassTuft key={i} x={g.x} dx={g.dx} idx={i} />
-    ))}
-  </g>
-)
+function Grass() {
+  return (
+    <g>
+      {GRASS.map((g, i) => (
+        <GrassTuft key={i} x={g.x} dx={g.dx} idx={i} />
+      ))}
+    </g>
+  )
+}
 
-export default function TreeScene({ palette = 'spring', density = 'normal', replayKey = 0 }) {
+export default function TreeScene({
+  palette = 'spring',
+  density = 'normal',
+  replayKey = 0,
+}: {
+  palette?: Season
+  density?: Density
+  replayKey?: number
+}) {
   return (
     <div className="scene" key={replayKey}>
       <svg

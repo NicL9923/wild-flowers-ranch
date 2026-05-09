@@ -12,6 +12,16 @@ import {
   useTweaks,
 } from './components/TweaksPanel'
 
+type Season = 'spring' | 'summer' | 'autumn'
+type Density = 'sparse' | 'normal' | 'lush'
+
+interface TweakState {
+  season: Season
+  density: Density
+  tagline: string
+  showEyebrow: boolean
+}
+
 const TABS = [
   { id: 'about', label: 'About Us', Panel: AboutPanel },
   { id: 'visit', label: 'Visit', Panel: VisitPanel },
@@ -19,7 +29,7 @@ const TABS = [
   { id: 'contact', label: 'Contact Us', Panel: ContactPanel },
 ]
 
-const TWEAK_DEFAULTS = {
+const TWEAK_DEFAULTS: TweakState = {
   season: 'spring',
   density: 'normal',
   tagline: 'A working flower farm at the edge of the valley.',
@@ -27,11 +37,11 @@ const TWEAK_DEFAULTS = {
 }
 
 export default function App() {
-  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS)
+  const [tweaks, setTweak] = useTweaks<TweakState>(TWEAK_DEFAULTS)
   const [active, setActive] = useState('about')
   const [replayKey, setReplayKey] = useState(0)
 
-  const { Panel } = TABS.find((t) => t.id === active)
+  const { Panel } = TABS.find((t) => t.id === active) ?? TABS[0]
 
   return (
     <div className="page">
@@ -83,7 +93,7 @@ export default function App() {
               { value: 'summer', label: 'Summer' },
               { value: 'autumn', label: 'Autumn' },
             ]}
-            onChange={(v) => setTweak('season', v)}
+            onChange={(v) => setTweak('season', v as Season)}
           />
         </TweakSection>
         <TweakSection label="Wildflowers">
@@ -95,7 +105,7 @@ export default function App() {
               { value: 'normal', label: 'Normal' },
               { value: 'lush', label: 'Lush' },
             ]}
-            onChange={(v) => setTweak('density', v)}
+            onChange={(v) => setTweak('density', v as Density)}
           />
           <TweakButton label="Re-grow tree" onClick={() => setReplayKey((k) => k + 1)} />
         </TweakSection>

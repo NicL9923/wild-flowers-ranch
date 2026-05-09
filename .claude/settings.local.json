@@ -15,7 +15,8 @@
       "Bash(npx eslint *)",
       "Bash(npm test *)",
       "Bash(npx prettier *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(npx tsc *)"
     ]
   }
 }
