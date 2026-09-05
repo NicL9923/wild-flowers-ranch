@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#10271f" />
+    <meta
+      name="description"
+      content="Three early directions for the Wild Flowers Ranch family landing page."
+    />
+    <title>Wild Flowers Ranch · The drawing board</title>
+    <link rel="icon" href="./assets/ranch-mark.webp" type="image/webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;450;500;550;600;650&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./concepts.css" />
+    <script src="./concepts.js" defer></script>
+  </head>
+  <body data-concept="golden-hour">
+    <a class="skip-link" href="#main">Skip to the ranch</a>
+    <div class="drawing-board" aria-label="Design concept selector">
+      <a class="board-label" href="#directions"
+        ><span class="board-dot"></span> The drawing board</a
+      >
+      <div class="concept-switcher" role="group" aria-label="Choose a design concept">
+        <button type="button" data-select="golden-hour" aria-pressed="true">
+          <span>01</span> Golden hour
+        </button>
+        <button type="button" data-select="little-world" aria-pressed="false">
+          <span>02</span> Little world
+        </button>
+        <button type="button" data-select="field-notes" aria-pressed="false">
+          <span>03</span> Field notes
+        </button>
+      </div>
+      <span class="board-note">A few ways to come home.</span>
+    </div>
+
+    <div class="ranch-page" id="ranch">
+      <header class="site-header">
+        <a class="brand" href="#ranch" aria-label="Wild Flowers Ranch home">
+          <img src="./assets/ranch-mark.webp" width="52" height="52" alt="" />
+          <span>Wild Flowers<span class="brand-ranch">R A N C H</span></span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a class="nav-home" href="#ranch" aria-current="page">The ranch</a>
+          <a href="#family">Our family <span aria-hidden="true">↗</span></a>
+        </nav>
+        <span class="header-motto">Integrity &amp; curiosity</span>
+      </header>
+
+      <main id="main">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="scene" id="scene">
+            <img
+              class="scene-image"
+              id="scene-image"
+              src="./assets/golden-hour.webp"
+              width="1536"
+              height="1024"
+              alt="A wildflower prairie at sunset, a ranch house with glowing windows, and four chairs around a campfire."
+              fetchpriority="high"
+            />
+            <div class="scene-shade"></div>
+            <div class="night-veil"></div>
+            <div class="stars" aria-hidden="true"></div>
+            <div class="fireflies" aria-hidden="true"></div>
+          </div>
+
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span class="tiny-flower" aria-hidden="true">✳</span> Our little corner of the wild
+            </p>
+            <h1 id="hero-title">A little wild.<br /><em>A lot of home.</em></h1>
+            <p class="hero-description" id="hero-description">
+              The flowers do their thing. The porch light stays on.<br class="desktop-break" />
+              And there's always a spot by the fire.
+            </p>
+            <a class="family-link" href="#family"
+              >Meet our family <span aria-hidden="true">↗</span></a
+            >
+            <span class="handwritten-note" id="hero-note">Kick off your boots. Stay awhile.</span>
+          </div>
+
+          <div class="world-caption" aria-hidden="true">
+            <span>↖</span> A whole little world of our own.
+          </div>
+          <div class="hero-bottom">
+            <a class="scroll-cue" href="#family"
+              ><span aria-hidden="true">↓</span> A little more about us</a
+            >
+            <div class="scene-controls" role="group" aria-label="Scene settings">
+              <button type="button" id="time-toggle" aria-pressed="false">
+                <span aria-hidden="true">☀</span> <span id="time-label">Golden hour</span>
+              </button>
+              <span class="control-divider" aria-hidden="true"></span>
+              <button type="button" id="motion-toggle" aria-pressed="false">
+                <span id="motion-symbol" aria-hidden="true">Ⅱ</span>
+                <span id="motion-label">Pause motion</span>
+              </button>
+            </div>
+          </div>
+          <span class="journal-number" aria-hidden="true">FIELD NOTE NO. 001 / HOME</span>
+        </section>
+
+        <section class="family-section" id="family" aria-labelledby="family-title">
+          <div class="family-intro">
+            <p class="eyebrow">The folks around the fire</p>
+            <h2 id="family-title">Four of us.<br /><em>One favorite place.</em></h2>
+            <p>
+              We're Kim, Isa, Maya, and Nicolas.<br />Welcome to our family's little place on the
+              internet.
+            </p>
+          </div>
+          <ul class="family-members" aria-label="Our family">
+            <li>
+              <span class="flower-medallion flower-kim" aria-hidden="true"
+                ><svg viewBox="0 0 100 100"><use href="#flower-daisy" /></svg
+              ></span>
+              <h3>Kim</h3>
+            </li>
+            <li>
+              <span class="flower-medallion flower-isa" aria-hidden="true"
+                ><svg viewBox="0 0 100 100"><use href="#flower-daisy" /></svg
+              ></span>
+              <h3>Isa</h3>
+            </li>
+            <li>
+              <span class="flower-medallion flower-maya" aria-hidden="true"
+                ><svg viewBox="0 0 100 100"><use href="#flower-daisy" /></svg
+              ></span>
+              <h3>Maya</h3>
+            </li>
+            <li>
+              <span class="flower-medallion flower-nicolas" aria-hidden="true"
+                ><svg viewBox="0 0 100 100"><use href="#flower-daisy" /></svg
+              ></span>
+              <h3>Nicolas</h3>
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>Wild Flowers Ranch</span>
+        <span>Rooted in integrity. Growing with curiosity.</span>
+        <a href="#ranch">Back to the porch <span aria-hidden="true">↑</span></a>
+      </footer>
+    </div>
+
+    <section class="directions" id="directions" aria-labelledby="directions-title">
+      <div class="directions-heading">
+        <div>
+          <p class="eyebrow">Same family. Three different feelings.</p>
+          <h2 id="directions-title">Find our kind of wild.</h2>
+        </div>
+        <p>Early landing page concepts<br />Choose a scene to try it on.</p>
+      </div>
+      <div class="direction-grid">
+        <button class="direction-card" type="button" data-select="golden-hour" aria-pressed="true">
+          <img
+            src="./assets/golden-hour.webp"
+            width="1536"
+            height="1024"
+            alt=""
+            loading="lazy"
+          /><span class="direction-info"
+            ><span class="direction-number">01</span
+            ><span
+              ><strong>Golden hour</strong><span>A wide-open prairie. A warm welcome.</span></span
+            ><span class="direction-arrow" aria-hidden="true">↗</span></span
+          >
+        </button>
+        <button
+          class="direction-card"
+          type="button"
+          data-select="little-world"
+          aria-pressed="false"
+        >
+          <img
+            src="./assets/little-world.webp"
+            width="1536"
+            height="1024"
+            alt=""
+            loading="lazy"
+          /><span class="direction-info"
+            ><span class="direction-number">02</span
+            ><span
+              ><strong>Little world</strong
+              ><span>Our own tiny ranch, down to the campfire.</span></span
+            ><span class="direction-arrow" aria-hidden="true">↗</span></span
+          >
+        </button>
+        <button class="direction-card" type="button" data-select="field-notes" aria-pressed="false">
+          <img
+            src="./assets/field-notes.webp"
+            width="1536"
+            height="1024"
+            alt=""
+            loading="lazy"
+          /><span class="direction-info"
+            ><span class="direction-number">03</span
+            ><span
+              ><strong>Field notes</strong><span>A painted prairie. A page from home.</span></span
+            ><span class="direction-arrow" aria-hidden="true">↗</span></span
+          >
+        </button>
+      </div>
+      <p class="draft-note">
+        Design studies for the family · Imagined ranch scenes · September 2026 ·
+        <a href="./assets/botanical-brand.webp" target="_blank" rel="noopener"
+          >Original botanical branding ↗</a
+        >
+      </p>
+    </section>
+    <p class="sr-only" id="concept-announcement" role="status" aria-live="polite"></p>
+    <noscript
+      ><p class="noscript-note">
+        You're viewing Golden hour. Enable JavaScript to try the other concepts and scene controls.
+      </p></noscript
+    >
+    <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <g id="flower-daisy">
+          <path
+            d="M51 92Q44 68 51 47M49 77Q25 80 28 64Q40 62 49 77M49 69Q73 68 72 56Q56 55 49 69"
+            fill="var(--flower-leaf, #667257)"
+            stroke="var(--flower-leaf, #667257)"
+            stroke-width="2"
+          />
+          <g fill="var(--petal, #cd794e)" stroke="var(--petal-edge, #ad593b)" stroke-width=".7">
+            <ellipse cx="50" cy="28" rx="7" ry="17" />
+            <ellipse cx="50" cy="28" rx="7" ry="17" transform="rotate(36 50 45)" />
+            <ellipse cx="50" cy="28" rx="7" ry="17" transform="rotate(72 50 45)" />
+            <ellipse cx="50" cy="28" rx="7" ry="17" transform="rotate(108 50 45)" />
+            <ellipse cx="50" cy="28" rx="7" ry="17" transform="rotate(144 50 45)" />
+            <ellipse cx="50" cy="28" rx="7" ry="17" transform="rotate(180 50 45)" />
+            <ellipse cx="50" cy="28" rx="7" ry="17" transform="rotate(216 50 45)" />
+            <ellipse cx="50" cy="28" rx="7" ry="17" transform="rotate(252 50 45)" />
+            <ellipse cx="50" cy="28" rx="7" ry="17" transform="rotate(288 50 45)" />
+            <ellipse cx="50" cy="28" rx="7" ry="17" transform="rotate(324 50 45)" />
+          </g>
+          <circle cx="50" cy="45" r="10" fill="#756044" />
+          <circle cx="48" cy="43" r="6" fill="var(--flower-center, #d2a655)" />
+          <path
+            d="M45 41L47 43M51 39L50 42M52 46L54 44M45 47L47 48"
+            stroke="#756044"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+        </g>
+      </defs>
+    </svg>
+  </body>
+</html>

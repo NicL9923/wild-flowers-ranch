@@ -1,0 +1,9 @@
+{
+  "name": "wild-flowers-ranch-concepts",
+  "compatibility_date": "2026-09-05",
+  "assets": {
+    "directory": "./concepts",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": true
+}

@@ -16,7 +16,7 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 24px;
+  scroll-padding-top: 90px;
 }
 body {
   margin: 0;
@@ -75,6 +75,69 @@ h3 {
   padding: 15px;
   background: var(--cream);
   color: var(--pine);
+}
+.drawing-board {
+  min-height: 66px;
+  padding: 10px 32px;
+  background: #f3efe5;
+  color: #3d483d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid #263f2620;
+}
+.board-label {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-size: 10px;
+  font-weight: 650;
+}
+.board-dot {
+  width: 6px;
+  height: 6px;
+  background: #b77850;
+  border-radius: 50%;
+}
+.board-note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  color: #626857;
+}
+.concept-switcher {
+  display: flex;
+  gap: 5px;
+}
+.concept-switcher button {
+  border: 1px solid transparent;
+  background: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-size: 12px;
+  min-height: 42px;
+}
+.concept-switcher button span {
+  color: #798073;
+  margin-right: 9px;
+  font-size: 10px;
+}
+.concept-switcher button[aria-pressed='true'] {
+  background: #e4e7dc;
+  border-color: #cdd2c2;
+  color: #203a2d;
+}
+.concept-switcher button:hover {
+  background: #e4e7dc;
+}
+.drawing-board :focus-visible {
+  outline-color: #744d31;
 }
 .ranch-page {
   position: relative;
@@ -143,7 +206,7 @@ h3 {
 .hero {
   position: relative;
   min-height: 740px;
-  height: min(900px, 100svh);
+  height: min(850px, calc(100svh - 66px));
   isolation: isolate;
   overflow: hidden;
   display: flex;
@@ -380,6 +443,10 @@ h1 em {
   transform: scale(1.035);
   transition: none;
 }
+.world-caption,
+.journal-number {
+  display: none;
+}
 .family-section {
   padding: 63px 8% 60px;
   display: grid;
@@ -479,11 +546,318 @@ h2 em {
 .site-footer a:hover {
   color: var(--gold);
 }
+.directions {
+  padding: 65px 5.2% 30px;
+  background: #eeeadd;
+  color: #2a3c2b;
+}
+.directions-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 28px;
+}
+.directions-heading .eyebrow {
+  color: #68705b;
+  margin-bottom: 10px;
+}
+.directions-heading > p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #626a57;
+}
+.direction-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+.direction-card {
+  background: transparent;
+  text-align: left;
+  padding: 0;
+  border: 1px solid #70795838;
+  border-radius: 3px;
+  overflow: hidden;
+  color: #2a3c2b;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.direction-card:hover {
+  transform: translateY(-4px);
+}
+.direction-card[aria-pressed='true'] {
+  border-color: #42583b;
+  outline: 1px solid #42583b;
+}
+.direction-card > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.9;
+  object-fit: cover;
+  display: block;
+}
+.direction-info {
+  display: flex;
+  align-items: start;
+  padding: 20px 15px;
+  gap: 12px;
+}
+.direction-number {
+  font-size: 10px;
+  color: #71735f;
+  padding-top: 6px;
+}
+.direction-info strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 1;
+  margin-bottom: 9px;
+}
+.direction-info strong + span {
+  font-size: 10px;
+  line-height: 1.6;
+  display: block;
+  color: #626a57;
+}
+.direction-arrow {
+  margin-left: auto;
+  font-size: 19px;
+}
+.draft-note {
+  margin-top: 34px;
+  text-align: center;
+  font-size: 9px;
+  color: #667057;
+  letter-spacing: 0.06em;
+}
+.directions :focus-visible {
+  outline-color: #744d31;
+}
 .svg-definitions {
   position: absolute;
   width: 0;
   height: 0;
   overflow: hidden;
+}
+.noscript-note {
+  padding: 20px;
+  background: var(--cream);
+  color: var(--pine);
+}
+
+/* Little world: a dimensional keepsake on a forest-green canvas. */
+body[data-concept='little-world'] .hero {
+  min-height: 740px;
+  background: #0b2015;
+}
+body[data-concept='little-world'] .hero-copy {
+  margin-left: 6.5%;
+  max-width: 40%;
+  padding-bottom: 90px;
+}
+body[data-concept='little-world'] h1 {
+  font-size: clamp(65px, 6.5vw, 100px);
+}
+body[data-concept='little-world'] .scene {
+  left: 37%;
+  top: 12%;
+  bottom: 5%;
+  right: 1%;
+  background: #0b2015;
+  z-index: 0;
+}
+body[data-concept='little-world'] .scene-image {
+  object-fit: contain;
+  object-position: center;
+}
+body[data-concept='little-world'] .scene-shade {
+  background:
+    linear-gradient(90deg, #0b2015 0%, transparent 12%),
+    linear-gradient(0deg, #0b2015 0%, transparent 10%, transparent 85%, #0b2015 100%);
+}
+body[data-concept='little-world'] .world-caption {
+  position: absolute;
+  right: 17%;
+  bottom: 11%;
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  color: #e0c89f;
+  font-size: 20px;
+  z-index: 2;
+  transform: rotate(-5deg);
+}
+body[data-concept='little-world'] .world-caption span {
+  font-size: 32px;
+  display: inline-block;
+  margin-right: 7px;
+}
+body[data-concept='little-world'] .family-section,
+body[data-concept='little-world'] .site-footer {
+  background: #0b2015;
+}
+body[data-concept='little-world'] .family-section {
+  border-top: 1px solid var(--line);
+}
+body[data-concept='little-world'] .family-link {
+  background: #d3aa70;
+  border-color: #d3aa70;
+}
+
+/* Field notes: paper, botanical color, and a painted landscape. */
+body[data-concept='field-notes'] {
+  --cream: #2f4030;
+  --muted: #69715d;
+  --gold: #a75c3e;
+  --line: #44563330;
+  color-scheme: light;
+}
+body[data-concept='field-notes'] .ranch-page {
+  background: #f5efdf;
+}
+body[data-concept='field-notes'] .site-header {
+  position: relative;
+  border-bottom: 1px solid #43533130;
+  padding-top: 21px;
+  padding-bottom: 21px;
+}
+body[data-concept='field-notes'] .hero {
+  display: block;
+  height: auto;
+  min-height: 850px;
+  padding: 38px 5.2% 90px;
+}
+body[data-concept='field-notes'] .hero-copy {
+  text-align: center;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body[data-concept='field-notes'] .hero-copy .eyebrow {
+  justify-content: center;
+  color: #6b7156;
+  margin-bottom: 16px;
+}
+body[data-concept='field-notes'] h1 {
+  font-size: clamp(56px, 5.8vw, 86px);
+  line-height: 1;
+}
+body[data-concept='field-notes'] h1 br {
+  display: none;
+}
+body[data-concept='field-notes'] h1 em {
+  color: #a75c3e;
+}
+body[data-concept='field-notes'] .hero-description {
+  color: #5b644f;
+  margin: 18px auto;
+  max-width: 500px;
+}
+body[data-concept='field-notes'] .hero-description br {
+  display: none;
+}
+body[data-concept='field-notes'] .family-link {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #a75c3e;
+  border-radius: 0;
+  padding: 0;
+  min-height: 32px;
+  color: #72452e;
+}
+body[data-concept='field-notes'] .handwritten-note {
+  display: none;
+}
+body[data-concept='field-notes'] .scene {
+  position: relative;
+  z-index: 0;
+  inset: auto;
+  height: clamp(340px, 35vw, 530px);
+  margin-top: 34px;
+  background: #eee1c5;
+  border-radius: 50% 50% 0 0 / 8% 8% 0 0;
+}
+body[data-concept='field-notes'] .hero {
+  display: flex;
+  flex-direction: column;
+}
+body[data-concept='field-notes'] .hero-copy {
+  order: -1;
+}
+body[data-concept='field-notes'] .scene {
+  width: 100%;
+}
+body[data-concept='field-notes'] .scene-image {
+  object-position: center 57%;
+  transform: none;
+}
+body[data-concept='field-notes'] .scene-shade {
+  background: none;
+}
+body[data-concept='field-notes'] .scroll-cue {
+  color: #4b5b3f;
+}
+body[data-concept='field-notes'] .scroll-cue > span {
+  border-color: #4b5b3f55;
+}
+body[data-concept='field-notes'] .hero-bottom {
+  bottom: 27px;
+}
+body[data-concept='field-notes'] .scene-controls {
+  background: #eee7d6;
+  border-color: #364b3338;
+  backdrop-filter: none;
+}
+body[data-concept='field-notes'] .scene-controls button {
+  color: #45523b;
+}
+body[data-concept='field-notes'] .scene-controls button > span:first-child {
+  color: #995636;
+}
+body[data-concept='field-notes'] .control-divider {
+  background: #364b3338;
+}
+body[data-concept='field-notes'] .journal-number {
+  display: block;
+  position: absolute;
+  left: 6.5%;
+  bottom: 114px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  background: #f7f0dee0;
+  padding: 8px 12px;
+}
+body[data-concept='field-notes'] .family-section {
+  background: #ecebdc;
+  padding-top: 54px;
+  padding-bottom: 54px;
+  border-top: 1px solid #44563330;
+  grid-template-columns: 1fr 1.2fr;
+}
+body[data-concept='field-notes'] .family-intro .eyebrow {
+  color: #766340;
+}
+body[data-concept='field-notes'] h2 em {
+  color: #a75c3e;
+}
+body[data-concept='field-notes'] .family-intro > p:last-child {
+  color: #5b644f;
+}
+body[data-concept='field-notes'] .flower-medallion {
+  background: #f9f4e9;
+  border-color: #8e957953;
+}
+body[data-concept='field-notes'] .site-footer {
+  background: #ecebdc;
+  color: #5b644f;
+}
+body[data-concept='field-notes'] .directions {
+  border-top: 1px solid #44563330;
 }
 
 @media (min-width: 1700px) {
@@ -496,6 +870,12 @@ h2 em {
   }
 }
 @media (max-width: 1100px) {
+  .drawing-board {
+    padding-inline: 20px;
+  }
+  .board-note {
+    display: none;
+  }
   .header-motto {
     display: none;
   }
@@ -516,10 +896,50 @@ h2 em {
     width: 75px;
     height: 95px;
   }
+  .direction-grid {
+    gap: 15px;
+  }
+  body[data-concept='little-world'] .hero-copy {
+    max-width: 43%;
+  }
+  body[data-concept='little-world'] h1 {
+    font-size: 75px;
+  }
+  body[data-concept='little-world'] .scene {
+    left: 38%;
+    right: 0%;
+  }
+  body[data-concept='little-world'] .world-caption {
+    right: 13%;
+    bottom: 15%;
+  }
 }
 @media (max-width: 760px) {
   html {
-    scroll-padding-top: 24px;
+    scroll-padding-top: 110px;
+  }
+  .drawing-board {
+    justify-content: center;
+    flex-direction: column;
+    gap: 7px;
+    padding: 10px 12px 9px;
+  }
+  .board-label {
+    font-size: 9px;
+  }
+  .concept-switcher {
+    width: 100%;
+    justify-content: center;
+    gap: 3px;
+  }
+  .concept-switcher button {
+    font-size: 11px;
+    padding: 8px 12px;
+    min-height: 38px;
+  }
+  .concept-switcher button span {
+    margin-right: 4px;
+    font-size: 9px;
   }
   .site-header {
     padding: 20px 6%;
@@ -548,7 +968,7 @@ h2 em {
   }
   .hero {
     min-height: 820px;
-    height: 100svh;
+    height: calc(100svh - 90px);
     max-height: 940px;
     align-items: start;
   }
@@ -631,8 +1051,98 @@ h2 em {
     order: 3;
     font-size: 9px;
   }
+  .directions {
+    padding: 44px 7% 26px;
+  }
+  .directions-heading {
+    display: block;
+  }
+  .directions-heading > p {
+    margin-top: 15px;
+  }
+  .direction-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .direction-card > img {
+    aspect-ratio: 1.9;
+  }
+  .direction-info {
+    padding: 19px;
+  }
+  .direction-info strong + span {
+    font-size: 11px;
+  }
+  .draft-note {
+    line-height: 1.8;
+  }
+  body[data-concept='little-world'] .hero {
+    min-height: 900px;
+  }
+  body[data-concept='little-world'] .hero-copy {
+    padding-top: 120px;
+    padding-bottom: 0;
+    margin-left: 7%;
+    max-width: 86%;
+  }
+  body[data-concept='little-world'] h1 {
+    font-size: clamp(64px, 10.4vw, 83px);
+  }
+  body[data-concept='little-world'] .hero-description {
+    margin-bottom: 20px;
+  }
+  body[data-concept='little-world'] .handwritten-note {
+    display: none;
+  }
+  body[data-concept='little-world'] .scene {
+    left: -6%;
+    right: -6%;
+    top: 450px;
+    bottom: 55px;
+  }
+  body[data-concept='little-world'] .world-caption {
+    right: 12%;
+    bottom: 12%;
+    font-size: 17px;
+  }
+  body[data-concept='field-notes'] .hero {
+    padding: 30px 5% 82px;
+    min-height: 0;
+    max-height: none;
+  }
+  body[data-concept='field-notes'] h1 {
+    font-size: 59px;
+  }
+  body[data-concept='field-notes'] h1 br {
+    display: block;
+  }
+  body[data-concept='field-notes'] .hero-description {
+    font-size: 12px;
+    max-width: 320px;
+  }
+  body[data-concept='field-notes'] .scene {
+    height: 340px;
+    margin-top: 29px;
+  }
+  body[data-concept='field-notes'] .scene-image {
+    object-position: 68% 50%;
+  }
+  body[data-concept='field-notes'] .family-section {
+    grid-template-columns: 1fr;
+  }
+  body[data-concept='field-notes'] .hero-bottom {
+    bottom: 20px;
+  }
+  body[data-concept='field-notes'] .journal-number {
+    bottom: 95px;
+    font-size: 8px;
+  }
 }
 @media (max-width: 370px) {
+  .concept-switcher button {
+    padding-inline: 9px;
+    font-size: 10px;
+  }
   .site-header nav a {
     font-size: 10px;
   }
@@ -643,7 +1153,8 @@ h2 em {
     height: 35px;
     width: 35px;
   }
-  h1 {
+  h1,
+  body[data-concept='little-world'] h1 {
     font-size: 59px;
   }
   .flower-medallion {
