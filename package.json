@@ -8,6 +8,8 @@
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
+    "deploy": "npm run build && wrangler deploy",
+    "preview:cloudflare": "wrangler dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -51,6 +53,7 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.11",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.5",
+    "wrangler": "^4.129.0"
   }
 }

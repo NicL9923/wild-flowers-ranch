@@ -1,32 +1,36 @@
 # Agent guidance
 
-Vite 8 + React 19 + TypeScript 6 + Tailwind CSS 4 project. Working directory: repo root.
+Vite 8 + React 19 + TypeScript 6 project. Working directory: repo root.
 
 ## Commands
 
 ```bash
 npm run dev          # dev server
-npm run build        # tsc --noEmit && vite build (must pass before committing)
-npm run typecheck    # type-check only
+npm run build        # tsc --noEmit && vite build; must pass before committing
 npm test             # vitest run
 npm run lint         # eslint
 npm run format       # prettier --write
+npm run deploy       # build and publish to Cloudflare; requires deployment authorization
 ```
 
 ## Key files
 
-- `src/App.tsx` — root component, tab state, tweaks state; `Season`/`Density` types defined here
-- `src/index.css` — all CSS custom properties, keyframes, layout (do not Tailwind-ify the animation or token rules)
-- `src/vite-env.d.ts` — Vite client types (CSS/asset imports)
-- `src/components/TreeScene.tsx` — SVG scene; `BRANCHES`/`CANOPY`/`GRASS`/`FLOWER_PALETTES` are typed data arrays
-- `src/components/Panels.tsx` — one export per tab (AboutPanel, VisitPanel, BouquetsPanel, ContactPanel)
-- `src/components/TweaksPanel.tsx` — self-contained floating debug widget; generic `useTweaks<T>` hook lives here
-- `design/` — original HTML prototype, reference only, excluded from ESLint and tsc
+- `src/App.tsx`: Golden Hour landing page, family section, and scene controls.
+- `src/index.css`: CSS custom properties, responsive layout, and keyframes.
+- `src/test/App.test.tsx`: family content, scene controls, and reduced-motion tests.
+- `public/images/`: Golden Hour artwork and supplied ranch mark.
+- `public/404.html`: branded not-found page.
+- `wrangler.jsonc`: Workers Static Assets configuration.
+- `docs/hosting.md`: deployment commands and credential-file location.
+- `.agents/tools/`: repeatable browser checks.
+- `design/`: archived prototypes, excluded from production, ESLint, tsc, and Prettier.
 
 ## Conventions
 
-- Prettier runs on commit (Husky + lint-staged); run `npm run format` before touching many files
-- ESLint flat config (`eslint.config.js`); `react-hooks/refs` is warn-only (intentional imperative drag pattern in TweaksPanel)
-- Import order enforced by `@trivago/prettier-plugin-sort-imports`: `react` → third-party → local
-- TypeScript 6 with strict mode; `tsconfig.json` targets `src/` only
-- CSS custom properties own the design tokens — don't replace them with Tailwind theme values
+- Preserve Golden Hour's artwork, colors, typography, and composition unless Nicolas requests a redesign.
+- CSS custom properties own the design tokens. Do not replace them with Tailwind theme values.
+- Honor reduced motion in CSS and scene interactions.
+- Prettier and ESLint run on staged changes through Husky and lint-staged.
+- Import order is React, third-party, local.
+- Keep TypeScript strict mode and meaningful behavior tests.
+- GitHub Actions checks PRs and deploys pushes to main. No direct app-repository pushes to main.

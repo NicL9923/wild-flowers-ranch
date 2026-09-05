@@ -1,51 +1,47 @@
 # Wild Flowers Ranch
 
-Website for Wild Flowers Ranch — a six-acre working flower farm in Bridgeport, OR. Features an animated SVG tree scene, seasonal wildflower palettes, and tab-based content panels.
+Golden Hour is the family landing page for Kim, Isa, Maya, and Nicolas. It has a
+sunset wildflower prairie, a glowing ranch house, a campfire, and a small family
+section. Nicolas selected this direction from the initial concept gallery.
 
-## Stack
-
-- **Vite 8** · **React 19** · **Tailwind CSS 4**
-- **Vitest 4** + Testing Library for tests
-- **ESLint 10** (flat config) + **Prettier 3** + **Husky** pre-commit hooks
-
-## Getting started
+## Development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-## Scripts
+Open `http://localhost:5173/`.
 
-| Command                 | Description                      |
-| ----------------------- | -------------------------------- |
-| `npm run dev`           | Start dev server                 |
-| `npm run build`         | Production build                 |
-| `npm run preview`       | Preview production build         |
-| `npm test`              | Run tests (single pass)          |
-| `npm run test:watch`    | Run tests in watch mode          |
-| `npm run test:coverage` | Run tests with v8 coverage       |
-| `npm run lint`          | Lint with ESLint                 |
-| `npm run lint:fix`      | Lint and auto-fix                |
-| `npm run format`        | Format with Prettier             |
-| `npm run format:check`  | Check formatting without writing |
-
-## Project structure
-
-```
-src/
-  App.jsx                  # Root component — layout, tab state, tweaks
-  index.css                # Design tokens, animations, global styles
-  components/
-    TreeScene.jsx           # Animated SVG tree + wildflowers
-    Panels.jsx              # About, Visit, Bouquets, Contact tab panels
-    TweaksPanel.jsx         # Floating debug panel + form controls
-  test/
-    setup.js                # jest-dom setup
-    App.test.jsx            # Smoke tests
-design/                    # Original HTML prototype (reference only)
+```bash
+npm run build
+npm test
+npm run lint
+npm run format:check
+npm run preview
 ```
 
-## Design system
+The site uses React 19, TypeScript 6, and Vite 8. CSS custom properties own the
+palette and layout. Scene controls switch between golden and blue hour, pause
+motion, and honor the system's reduced-motion preference.
 
-CSS custom properties in `index.css` define the full palette (`--tan`, `--sage`, `--ink`, `--bark`, `--leaf-*`, `--bloom-*`). The tree growth and wildflower animations are pure CSS keyframes driven by `--delay` and `--dur` custom properties set inline per element.
+## Hosting
+
+Cloudflare Workers Static Assets serves the production `dist/` directory. The
+configuration is in `wrangler.jsonc`. Pull requests run the quality checks; pushes
+to `main` deploy through GitHub Actions. See [hosting notes](docs/hosting.md).
+
+## Files
+
+- `src/App.tsx`: production page and scene interactions.
+- `src/index.css`: Golden Hour styles and responsive layout.
+- `public/images/`: production scene and ranch mark.
+- `public/404.html`: missing-page response.
+- `src/test/App.test.tsx`: family content and scene-control tests.
+- `.agents/tools/check-landing.js`: browser validation and screenshots.
+- `design/concepts/`: archived HTML concept gallery and its artwork.
+- `design/legacy-react/`: archived tree prototype.
+
+Design archives are excluded from production output, linting, and TypeScript.
+[Image prompts and provenance](docs/landing-image-prompts.json) document the original
+artwork. The generated ranch scene is an imagined setting.
