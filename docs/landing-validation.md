@@ -1,3 +1,20 @@
+# Custom-domain configuration validation
+
+September 5, 2026, branch `connect-ranch-domain`, based on `668665b`.
+
+- Cloudflare accepted the Free zone and both custom-domain bindings to `wild-flowers-ranch`.
+- Verified all four scanned legacy DNS records against the old authoritative nameserver,
+  imported them as DNS-only, and read back all six Cloudflare DNS records.
+- Zone activation is pending the registrar nameserver change. Custom-hostname HTTPS
+  has not been verified while delegation is pending.
+- Production build and Wrangler deployment dry run passed. Configuration review
+  confirmed exact hostnames, `custom_domain: true`, and the preserved workers.dev route.
+- Existing application tests and browser checks below are reused: no application,
+  artwork, styles, or dependency inputs changed.
+- Final configuration SHA-256: `613068a577105c72d0e35d774ab06005c6aae24f6135017dbabe5b479be55e1a`.
+
+---
+
 # Golden Hour release validation
 
 Validated September 5, 2026. Nicolas selected Golden Hour and authorized shipping it.
