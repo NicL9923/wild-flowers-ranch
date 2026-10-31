@@ -21,7 +21,7 @@ npm run format:check
 npm run preview
 ```
 
-The site uses React 19, TypeScript 6, and Vite 8. CSS custom properties own the
+Use Node.js 26.13 or newer within the Node 26 LTS line. The site uses React 19, TypeScript 7 for type checking, and Vite 8. TypeScript 6 remains installed for typescript-eslint, which requires its compiler API. CSS custom properties own the
 palette and layout. Scene controls switch between golden and blue hour, pause
 motion, and honor the system's reduced-motion preference.
 
