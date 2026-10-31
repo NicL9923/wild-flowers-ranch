@@ -1,6 +1,9 @@
 # Agent guidance
 
-Vite 8 + React 19 + TypeScript 7 project. Node.js 26 LTS is required. TypeScript 6 supplies the compiler API for typescript-eslint. Working directory: repo root.
+Vite 8 + React 19 + TypeScript 7 project. Node.js 26.13.0 is the tested LTS
+baseline; newer 26.x patches are allowed. Run `npm run typecheck` for TypeScript 7.
+Bare `tsc` resolves to TypeScript 6, which supplies the API for typescript-eslint.
+Working directory: repo root.
 
 ## Commands
 
