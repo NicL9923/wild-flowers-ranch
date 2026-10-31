@@ -155,7 +155,6 @@ function buildFlowers(palette, density) {
     { x: 1310,h: 220, type: 'spike',  c: palettes[3], lean: 3 },
   ];
 
-  // Density filter
   const step = density === 'lush' ? 1 : density === 'sparse' ? 2 : 1;
   const filtered = density === 'sparse'
     ? positions.filter((_, i) => i % 2 === 0)
@@ -164,7 +163,6 @@ function buildFlowers(palette, density) {
   return filtered;
 }
 
-// Bloom rendering by type
 const Bloom = ({ x, y, c, type, delay }) => {
   const color = COLOR[c] || COLOR.cream;
   const style = {
@@ -174,7 +172,6 @@ const Bloom = ({ x, y, c, type, delay }) => {
   };
 
   if (type === 'daisy') {
-    // 5-petal daisy
     const petals = [];
     for (let i = 0; i < 7; i++) {
       const a = (i * 360) / 7;
@@ -251,17 +248,14 @@ const Flower = ({ flower, idx, density }) => {
   const ctlX = x + lean * 3;
   const ctlY = baseY - h * 0.55;
 
-  // Stagger appearance across the row
   const stemDelay = 1.0 + idx * 0.08;
   const bloomDelay = stemDelay + 0.8;
 
-  // Two leaves on the stem for some flowers
   const leafY1 = baseY - h * 0.4;
   const leafY2 = baseY - h * 0.7;
 
   return (
     <g>
-      {/* Stem */}
       <path
         className="stem"
         pathLength="1"
@@ -269,7 +263,6 @@ const Flower = ({ flower, idx, density }) => {
         strokeWidth={2}
         style={{ ['--delay']: `${stemDelay}s` }}
       />
-      {/* Stem leaves (small) */}
       {(idx % 2 === 0) && (
         <>
           <ellipse
@@ -382,7 +375,6 @@ const Trunk = () => (
   </g>
 );
 
-// ---------- Branches ----------
 const Branches = () => (
   <g>
     {BRANCHES.map((b, i) => (
@@ -401,7 +393,6 @@ const Branches = () => (
   </g>
 );
 
-// ---------- Canopy ----------
 const Canopy = () => (
   <g className="canopy-group">
     {CANOPY.map((c, i) => (
@@ -410,7 +401,6 @@ const Canopy = () => (
   </g>
 );
 
-// ---------- Wildflowers ----------
 const Wildflowers = ({ palette, density }) => {
   const flowers = buildFlowers(palette, density);
   return (
@@ -422,7 +412,6 @@ const Wildflowers = ({ palette, density }) => {
   );
 };
 
-// ---------- Grass ----------
 const Grass = () => (
   <g>
     {GRASS.map((g, i) => (
@@ -431,7 +420,6 @@ const Grass = () => (
   </g>
 );
 
-// ---------- Main scene ----------
 const TreeScene = ({ palette = 'spring', density = 'normal', replayKey = 0 }) => {
   return (
     <div className="scene" key={replayKey}>

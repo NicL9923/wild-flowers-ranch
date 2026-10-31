@@ -1,5 +1,3 @@
-// Main App — heading, tabs, scene, tweaks panel
-
 const TABS = [
   { id: 'about',    label: 'About Us',  panel: 'AboutPanel' },
   { id: 'visit',    label: 'Visit',     panel: 'VisitPanel' },

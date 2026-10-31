@@ -1,5 +1,3 @@
-// Tab content panels for the bottom half
-
 const AboutPanel = () => (
   <div className="panel">
     <div>
